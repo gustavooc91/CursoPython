@@ -1,88 +1,63 @@
-a = input("Dia ")
+A = input().split()
 B = input().split()
-c = input("Dia ")
+C = input().split()
 D = input().split()
 
-if a.isnumeric():
-    L1 = [int(a)]
-else:
-    L1 = []
+L1 = []
+L2 = []
 
-if c.isnumeric():
-    L2 = [int(c)]
-
-else:
-    L2 = []
-
-for i in B:
-    try:   
-        I = int(i)
-        L1.append(I)
-    except:
-        if i.isnumeric():
-            L1.append(0)
-        else:
-            pass
-
-for i in D:
-    try:   
-        I = int(i)
-        L2.append(I)
-    except:
-        if i.isnumeric():
-            L2.append(0)
-        else:
-            pass
-if len(L1) == 4 and len (L2) == 4:
-    C1 = 24*60*60*L1[0] + 60*60*L1[1] + 60*L1[2] + L1[3]
-    C2 = 24*60*60*L2[0] + 60*60*L2[1] + 60*L2[2] + L2[3]
-else:
-    for i in L1:
-        if len(L1) < 4:
-            L1.append(0)
-    for i in L2:
-        if len(L2) < 4:
-            L2.append(0)
+try:
+    for i in A:
+        if i.isdigit():
+            a = int(i)
+            L1.append(a)
+except:
+        pass
     
-    C1 = 24*60*60*L1[0] + 60*60*L1[1] + 60*L1[2] + L1[3]
-    C2 = 24*60*60*L2[0] + 60*60*L2[1] + 60*L2[2] + L2[3]
+try:
+    for i in C:
+        if i.isdigit():
+            c = int(i)
+            L2.append(c)
+except:
+    pass
+    
+try:
+    for i in B:
+        if i != ":":
+            b = int(i)
+            L1.append(b)
+except:
+    pass
+        
+try:
+    for i in D:
+        if i != ":":
+            d = int(i)
+            L2.append(d)
+            
+except:
+    pass
 
+print(L1)
+print(L2)
 
-cr = C2 - C1
+C1 = 86400*L1[0] + 3600*L1[1] + 60*L1[2] + L1[3]
+C2 = 86400*L2[0] + 3600*L2[1] + 60*L2[2] + L2[3]
 
-CR = float (cr)
+CR = C2 - C1
 
 P = CR // 86400
-PM = CR / 86400 - P
-p = int(P)
+PM = CR % 86400
 
-H = PM * 24
-HR = round(H)
-HM = H - HR
-h = int (HR)
+H = PM // 3600
+HM = PM  % 3600
 
-M = HM * 60
-MR = round(M)
-MM = M - MR
-m = int (MR)
+M = HM // 60
 
-S = MM * 60
-SR = round(S)
-SM = S - SR
-s = int (SR)
+S = HM % 60
 
-
-# print(B)
-# print(D)
-# print(L1)
-# print(L2)
-# print(C1, C2, CR)
-# print(P, PM, p)
-# print(H, HR, HM, h)
-# print(M, MR, MM, m)
-# print(S, SR, SM, s)
-
-print(f"{p} dia(s)")
-print(f"{h} hora(s)")
-print(f"{m} minuto(s)")
-print(f"{s} segundo(s)")
+print(f"{P} dia(s)")
+print(f"{H} hora(s)")
+print(f"{M} minuto(s)")
+print(f"{S} segundo(s)")
